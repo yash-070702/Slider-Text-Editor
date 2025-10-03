@@ -221,7 +221,6 @@ async exportAllSlidesToPDF(filename = 'slides.pdf') {
     initializeSlides() {
         this.slides = [
             new Slide(1, 'assets/slide1.jpg'),
-            new Slide(2, 'assets/slide2.jpg')
         ];
     }
 
