@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide Text Editor</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header class="toolbar">
+            <div class="toolbar-left">
+                <span id="slideInfo" class="slide-info">Slide 1 of 2</span>
+            </div>
+
+            <div class="toolbar-middle">
+                <button id="addText" class="btn btn-primary" aria-label="Add text element">+ Add Text</button>
+                <button id="deleteText" class="btn btn-danger" aria-label="Delete selected text" disabled>🗑 Delete</button>
+            </div>
+
+            <div class="toolbar-right">
+                <button id="exportAllPdf" class="btn btn-primary" aria-label="Export all slides to PDF">📄 Export All PDF</button>
+
+                <button id="exportPng" class="btn btn-success" aria-label="Export as PNG">⬇ Download PNG</button>
+        
+            </div>
+            
+        </header>
+
+        <div class="editor-container">
+            <aside class="slides-sidebar" id="slidesSidebar">
+                <div class="sidebar-header">
+                    <h3>Slides</h3>
+                    <button id="addSlide" class="btn btn-small btn-primary" aria-label="Add new slide">+ Add</button>
+                </div>
+                <div class="slides-list" id="slidesList"></div>
+            </aside>
+
+            <div class="slide-wrapper">
+                <div id="slideContainer" class="slide-container">
+                    <img id="slideImage" src="" alt="Slide background" class="slide-image">
+                    <div id="textOverlay" class="text-overlay"></div>
+                </div>
+            </div>
+
+            <aside class="controls-panel" id="controlsPanel">
+                <h3>Text Properties</h3>
+                <p class="no-selection" id="noSelection">No text selected</p>
+
+                <div class="controls-content" id="controlsContent" style="display: none;">
+                    <div class="control-group">
+                        <label for="textContent">Text Content:</label>
+                        <textarea id="textContent" rows="3" placeholder="Enter text..."></textarea>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="fontFamily">Font Family:</label>
+                        <select id="fontFamily">
+                            <option value="Arial">Arial</option>
+                            <option value="Georgia">Georgia</option>
+                            <option value="'Times New Roman'">Times New Roman</option>
+                            <option value="'Courier New'">Courier New</option>
+                            <option value="Verdana">Verdana</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="fontSize">Font Size: <span id="fontSizeValue">24</span>px</label>
+                        <input type="range" id="fontSize" min="12" max="72" value="24">
+                    </div>
+
+                    <div class="control-group">
+                        <label for="fontColor">Font Color:</label>
+                        <input type="color" id="fontColor" value="#000000">
+                    </div>
+
+                    <div class="control-group">
+    <label for="textAlign">Alignment:</label>
+    <select id="textAlign">
+        <option value="left">Left</option>
+        <option value="center">Center</option>
+        <option value="right">Right</option>
+    </select>
+</div>
+
+                    <div class="control-group">
+                        <label>Style:</label>
+                        <div class="button-group">
+                            <button id="toggleBold" class="btn btn-small" aria-label="Toggle bold">
+                                <strong>B</strong>
+                            </button>
+                            <button id="toggleItalic" class="btn btn-small" aria-label="Toggle italic">
+                                <em>I</em>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Quick Placement:</label>
+                        <div class="placement-grid">
+                            <button id="placeTL" class="btn btn-small" aria-label="Place top-left">↖ TL</button>
+                            <button id="placeTR" class="btn btn-small" aria-label="Place top-right">↗ TR</button>
+                            <button id="placeBL" class="btn btn-small" aria-label="Place bottom-left">↙ BL</button>
+                            <button id="placeBR" class="btn btn-small" aria-label="Place bottom-right">↘ BR</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label>Z-Order:</label>
+                        <div class="button-group">
+                            <button id="bringForward" class="btn btn-small" aria-label="Bring forward">↑ Forward</button>
+                            <button id="sendBackward" class="btn btn-small" aria-label="Send backward">↓ Backward</button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="startAnimation">Start Animation:</label>
+                        <select id="startAnimation">
+                            <option value="none">None</option>
+                            <option value="fadeIn">Fade In</option>
+                            <option value="slideInLeft">Slide In Left</option>
+                            <option value="slideInRight">Slide In Right</option>
+                            <option value="slideInTop">Slide In Top</option>
+                            <option value="slideInBottom">Slide In Bottom</option>
+                            <option value="zoomIn">Zoom In</option>
+                            <option value="bounceIn">Bounce In</option>
+                        </select>
+                    </div>
+
+                    <div class="control-group">
+                        <label for="endAnimation">End Animation:</label>
+                        <select id="endAnimation">
+                            <option value="none">None</option>
+                            <option value="fadeOut">Fade Out</option>
+                            <option value="slideOutLeft">Slide Out Left</option>
+                            <option value="slideOutRight">Slide Out Right</option>
+                            <option value="slideOutTop">Slide Out Top</option>
+                            <option value="slideOutBottom">Slide Out Bottom</option>
+                            <option value="zoomOut">Zoom Out</option>
+                            <option value="bounceOut">Bounce Out</option>
+                        </select>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div> 
+
+
+    <script src="app.js"></script>
+</body>
+</html>
